@@ -1,5 +1,5 @@
 "use client";
 
-import MeteorsForm from "./meteorsShower";
+import { MeteorsDemo } from "./meteorsShower";
 
-export default MeteorsForm;
+export default MeteorsDemo;
