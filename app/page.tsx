@@ -1,3 +1,4 @@
+import { ThemeToggler } from "@/components/themeToggler";
 import Image from "next/image";
 
 export default function Home() {
@@ -52,7 +53,9 @@ export default function Home() {
               -&gt;
             </span>
           </h2>
+          <ThemeToggler />
           <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
+            
             Find in-depth information about Next.js features and API.
           </p>
         </a>
