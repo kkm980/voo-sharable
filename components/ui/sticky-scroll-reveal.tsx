@@ -4,6 +4,7 @@ import { useMotionValueEvent, useScroll } from "framer-motion";
 import { motion } from "framer-motion";
 import { cn } from "@/utils/cn";
 import { useTheme } from "next-themes";
+import "./scrollReveal.css";
 
 export const StickyScroll = ({
   content,
@@ -63,7 +64,7 @@ export const StickyScroll = ({
       animate={{
         backgroundColor: theme==="light"?backgroundLightColors[activeCard % backgroundLightColors.length]:backgroundDarkColors[activeCard % backgroundDarkColors.length],
       }}
-      className="h-[30rem] overflow-y-auto flex justify-center relative space-x-10 rounded-md p-10"
+      className="h-[30rem] overflow-y-auto flex justify-center relative space-x-10 rounded-md p-10 usersContainer"
       ref={ref}
     >
       <div className="div relative flex items-start px-4">
