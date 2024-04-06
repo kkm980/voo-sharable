@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 
 import { ThemeProvider } from "@/components/theme-provider";
 import SessionProvider from "@/components/SessionProvider";
+import AuthCheck from "@/components/AuthCheck";
 
 export default function RootLayout({
   children,
@@ -19,19 +20,21 @@ export default function RootLayout({
 }>) {
   return (
     <SessionProvider>
-      <html lang="en" suppressHydrationWarning>
-        <head />
-        <body>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
-        </body>
-      </html>
+      <AuthCheck>
+        <html lang="en" suppressHydrationWarning>
+          <head />
+          <body>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              {children}
+            </ThemeProvider>
+          </body>
+        </html>
+      </AuthCheck>
     </SessionProvider>
-  )
+  );
 }
