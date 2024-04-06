@@ -1,11 +1,9 @@
-import MeteorsForm from "@/components/signupForm";
-import { ThemeToggler } from "@/components/themeToggler";
-import Image from "next/image";
+import StickyScrollReveal from "@/components/dashboard/cardScroler/CardScroller";
 
 export default function Home() {
   return (
-    <main className="flex min-h-[2000px] flex-col items-center justify-between p-24">
-
+    <main className="flex max-h-screen flex-col items-center justify-between p-24 overflow-hidden">
+     <StickyScrollReveal/>
     </main>
   );
 }
