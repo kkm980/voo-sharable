@@ -9,6 +9,7 @@ export const metadata: Metadata = {
 };
 
 import { ThemeProvider } from "@/components/theme-provider"
+import { Nav } from "@/components/common/navbar";
 
 export default function RootLayout({
   children,
@@ -26,6 +27,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+            <Nav/>
             {children}
           </ThemeProvider>
         </body>
