@@ -3,6 +3,7 @@ import axios from "axios";
 import NextAuth from "next-auth/next";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
+
 const handler = NextAuth({
   providers: [
     GithubProvider({
