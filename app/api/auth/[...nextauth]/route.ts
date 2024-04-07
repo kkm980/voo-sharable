@@ -1,9 +1,10 @@
 // importing providers
-import axios from "axios";
+import { connect } from "@/dbConfig";
+import User from "@/models/userModel";
 import NextAuth from "next-auth/next";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
-
+connect();
 const handler = NextAuth({
   providers: [
     GithubProvider({
@@ -23,7 +24,18 @@ const handler = NextAuth({
     async signIn({ account, profile }: any) {
       if (account?.provider === "google") {
         // Check if the user already exists in the database
-        // await fetch("/api/auth/callback/google");
+        const isUserExist = await User.findOne({ email: profile?.email });
+        if (isUserExist) return true;
+        // Create a new user if they don't exist
+        let currentTimestamp = Math.floor(Date.now() / 1000) + 3600;
+        const newUser = new User({
+          name: profile?.name,
+          accessToken: account?.access_token,
+          email: profile?.email,
+          photo: profile?.picture,
+          accessTkenExpiry: currentTimestamp
+        });
+        const resp= await newUser.save();
       }
       return true;
     },
