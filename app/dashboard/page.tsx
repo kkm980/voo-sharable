@@ -16,6 +16,9 @@ export default function Home() {
   const dispatch = useAppDispatch();
 
   const session = useSession();
+  useEffect(()=>{
+    console.log(session, "session");
+  },[session])
   useEffect(() => {
     const fetchAccessToken = async () => {
       try {
@@ -25,6 +28,8 @@ export default function Home() {
           console.log(resp.data?.data?.accessToken, "ourdata");
 
           if (resp.data?.data?.accessToken) {
+            const newResp: any = await axios.post("/api/getAllUsers",{email: resp.data?.data?.email});
+            console.log(newResp,"newResp");
               setLoading(false);
           } else{
             signOut();

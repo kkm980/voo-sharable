@@ -6,6 +6,8 @@ type CounterState = {
   count: number;
   loading: boolean;
   multiLangInputListStore: any[];
+  isAdmin: string;
+  isPrivate: string;
   userSession: any;
 };
 
@@ -14,7 +16,9 @@ const initialState = {
     name: "ram",
     count: 0,
     loading: true,
-    userSession: {}
+    userSession: {},
+    isAdmin: "false",
+    isPrivate: "false"
 } as CounterState;
 
 export const counter = createSlice({
@@ -52,6 +56,14 @@ export const counter = createSlice({
     setUserSession: (state, action: PayloadAction<any>)=>{
       console.log("userreduxSess", action.payload);
       state.userSession = {...action.payload};
+    },
+    setIsReduxAdmin: (state, action: PayloadAction<any>)=>{
+      console.log("userreduxSess", action.payload);
+      state.isAdmin = {...action.payload};
+    },
+    setIsReduxPrivate: (state, action: PayloadAction<any>)=>{
+      console.log("userreduxSess", action.payload);
+      state.isPrivate = {...action.payload};
     }
   },
 });
@@ -66,6 +78,8 @@ export const {
   reset,
   setLoading,
   setMultiLangInputListStore,
-  setUserSession
+  setUserSession,
+  setIsReduxAdmin,
+  setIsReduxPrivate
 } = counter.actions;
 export default counter.reducer;

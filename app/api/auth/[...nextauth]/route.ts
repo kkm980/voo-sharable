@@ -25,7 +25,12 @@ const handler = NextAuth({
       if (account?.provider === "google") {
         // Check if the user already exists in the database
         const isUserExist = await User.findOne({ email: profile?.email });
-        if (isUserExist) return isUserExist;
+        if (isUserExist) {
+          // Update the expiry time of access token if user exists and logging in again
+        // let currentTimestamp = Math.floor(Date.now() / 1000) + 3600;
+        // const resp = await User.findByIdAndUpdate(isUserExist._id, {...isUserExist, accessTokenExpiry: currentTimestamp}, { new: true });
+        return true;
+        }
         // Create a new user if they don't exist
         let currentTimestamp = Math.floor(Date.now() / 1000) + 3600;
         const newUser = new User({

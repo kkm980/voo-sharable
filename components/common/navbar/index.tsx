@@ -5,7 +5,10 @@ import { HoveredLink, Menu, MenuItem } from "../../ui/navbar-menu";
 import { cn } from "@/utils/cn";
 import { ThemeToggler } from "@/components/themeToggler";
 import axios from "axios";
-
+import { useAppDispatch } from "@/redux/hooks";
+import {
+setIsReduxPrivate, setIsReduxAdmin
+} from "@/redux/features/counterSlice";
 export function Nav() {
   return (
     <div className="relative w-full flex items-center justify-center">
@@ -15,10 +18,11 @@ export function Nav() {
 }
 
 function Navbar({ className }: { className?: string }) {
+  const dispatch = useAppDispatch();
   const session = useSession();
   const [userInfo, setUserInfo] = useState<any>();
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [isPrivate, setIsPrivate] = useState(false);
+  const [isAdmin, setIsAdmin] = useState("false");
+  const [isPrivate, setIsPrivate] = useState("false");
   const [active, setActive] = useState<string | null>(null);
 
   useEffect(() => {
@@ -41,10 +45,10 @@ function Navbar({ className }: { className?: string }) {
 
   useEffect(()=>{
     if(userInfo?.isAdmin=="true"){
-      setIsAdmin(true)
+      setIsAdmin("true")
     }
     if(userInfo?.isPrivate=="true"){
-      setIsPrivate(true);
+      setIsPrivate("true");
     }
   },[userInfo])
   return (
@@ -58,13 +62,15 @@ function Navbar({ className }: { className?: string }) {
             {isPrivate?
             <HoveredLink
             onClick={async()=>{
-              setIsPrivate(false);
+              setIsPrivate("false");
+              dispatch(setIsReduxPrivate("false"));
               await axios.patch("/api/update", {...userInfo, isPrivate: "false"});
             }}
             >Make Public ?</HoveredLink>:
             <HoveredLink
             onClick={async()=>{
-              setIsPrivate(true);
+              setIsPrivate("true");
+              dispatch(setIsReduxPrivate("true"));
               await axios.patch("/api/update", {...userInfo, isPrivate: "true"});
             }}
             >Make Private ?</HoveredLink>}
@@ -75,13 +81,15 @@ function Navbar({ className }: { className?: string }) {
           <div className="flex flex-col space-y-4 text-sm">
             {isAdmin?<HoveredLink
               onClick={async()=>{
-                setIsAdmin(false);
+                setIsAdmin("false");
+                dispatch(setIsReduxAdmin("false"));
                 await axios.patch("/api/update", {...userInfo, isAdmin: "false"});
               }}
             >Undo Admin ?</HoveredLink>:
             <HoveredLink
             onClick={async()=>{
-              setIsAdmin(true);
+              setIsAdmin("true");
+              dispatch(setIsReduxAdmin("true"));
               await axios.patch("/api/update", {...userInfo, isAdmin: "true"});
             }}
             >Make yourself Admin ?</HoveredLink>}
