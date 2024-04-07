@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import { cn } from "@/utils/cn";
 import {
   IconBrandGithub,
@@ -17,13 +17,10 @@ export default function SignupForm() {
     e.preventDefault();
     console.log("Form submitted");
   };
-  // if (session) {
-  //   //logged in code
-  //   console.log(session, "next_session");
-  // }
-  useEffect(()=>{
-    console.log("session_real", session, "session_real");
-  }, [session])
+  if (session) {
+    //logged in code
+    console.log(session, "next_session");
+  }
 
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">

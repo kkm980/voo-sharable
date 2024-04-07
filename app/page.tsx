@@ -1,3 +1,4 @@
+"use client";
 import MeteorsForm from "@/components/signupForm";
 import { ThemeToggler } from "@/components/themeToggler";
 import Image from "next/image";

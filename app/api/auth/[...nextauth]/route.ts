@@ -3,7 +3,6 @@ import axios from "axios";
 import NextAuth from "next-auth/next";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
-
 const handler = NextAuth({
   providers: [
     GithubProvider({
@@ -15,12 +14,15 @@ const handler = NextAuth({
       clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET as string,
     }),
   ],
+  secret: process.env.NEXTAUTH_SECRET,
+  pages: {
+    signIn: "/",
+  },
   callbacks: {
-    async signIn({ account, profile }) {
+    async signIn({ account, profile }: any) {
       if (account?.provider === "google") {
         // Check if the user already exists in the database
         // await fetch("/api/auth/callback/google");
-        console.log("do db things here");
       }
       return true;
     },

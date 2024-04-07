@@ -4,7 +4,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { ReactNode } from "react";
 
 type Props = {
-  children: ReactNode;
+  children?: ReactNode;
 };
 
 const AuthCheck = ({ children }: Props) => {
@@ -15,9 +15,9 @@ const AuthCheck = ({ children }: Props) => {
   if (status === "unauthenticated" && pathname !== "/") {
     router.push("/");
     return <></>;
-  } else if(status === "authenticated" && pathname === "/"){
+  } else if(status === "authenticated" && pathname !== "/dashboard"){
     router.push("/dashboard");
-    return <></>;
+    return <></>
   }
   else return <>{children}</>;
 };

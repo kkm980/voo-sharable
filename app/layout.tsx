@@ -20,21 +20,20 @@ export default function RootLayout({
 }>) {
   return (
     <SessionProvider>
-      <AuthCheck>
-        <html lang="en" suppressHydrationWarning>
-          <head />
-          <body>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-            >
-              {children}
-            </ThemeProvider>
-          </body>
-        </html>
-      </AuthCheck>
+      <html lang="en" suppressHydrationWarning>
+        <head />
+        <body>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <AuthCheck/>
+            {children}
+          </ThemeProvider>
+        </body>
+      </html>
     </SessionProvider>
   );
 }
